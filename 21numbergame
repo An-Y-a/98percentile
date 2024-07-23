@@ -1,0 +1,44 @@
+import random
+
+def user(player):
+  while True:
+    try:
+      choice = int(input(f"Player {player}, enter your choice (1, 2, or 3,): "))
+      if choice>=1 and choice<=3:
+        return choice
+      else:
+        print("Invalid input. Please enter 1, 2, or 3.") 
+    except ValueError:
+      print("Invalid input, please enter a valid number.")
+
+
+def computer():
+  return random.randint(1,3)
+
+def play():
+  sum = 0
+  current_player= 1
+
+  print("Let's play the 21 game!")
+  print("I wonder who will win??")
+  print("The player who reaches or exceeds 21 loses...")
+  print("A player may choose 1, 2, or 3 numbers during their turn.")
+
+  while sum<21:
+    print(f"\nCurrent number: {sum}")
+    if current_player==1:
+      choice = user(current_player)
+    else:
+      choice= computer()
+      print(f"computer chooses: {choice}")
+    if (choice+sum)>=21:
+      if current_player==1:
+        print("Computer wins!")
+      else:
+        print("Player wins!")
+      break
+    sum+=choice
+
+    current_player = 3 - current_player
+
+play()
